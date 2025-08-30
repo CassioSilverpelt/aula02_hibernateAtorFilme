@@ -11,33 +11,41 @@ public class AtorDao implements IAtorDao{
 	EntityManagerFactory mf = Persistence.createEntityManagerFactory("HibJPA");
 	
 	
-	@Override
 	public Ator pesquisar(String ator) {
 		return null;
 	}
 
-	@Override
 	public void inserir(Ator ator) {
-		// TODO Auto-generated method stub
-		
+		EntityManager em = mf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(ator);
+		em.getTransaction().commit();
+		em.close();
 	}
 
-	@Override
 	public void remover(long id) {
-		// TODO Auto-generated method stub
-		
+		EntityManager em = mf.createEntityManager();
+		em.getTransaction().begin();
+		Ator ator = em.find(Ator.class, id);
+		if (ator != null) {
+			em.remove(ator);
+		}
 	}
 
-	@Override
 	public List<Ator> lista() {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = mf.createEntityManager();
+		List<Ator> atores = em.createQuery("SELECT a FROM Ator a", Ator.class).getResultList();
+		em.close();
+		return atores;
 	}
 
-	@Override
-	public List<Ator> apenasUmFilme(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Ator> apenasUmAtor(String nome) {
+		EntityManager em = mf.createEntityManager();
+		List<Ator> atores = em.createQuery("SELECT a FROM Ator a WHERE a.nome LIKE :nome", Ator.class)
+					.setParameter("nome", "%" + nome + "%")
+					.getResultList();
+		em.close();
+		return atores;
 	}
 
 }

@@ -9,5 +9,5 @@ public interface IAtorDao {
 	public void inserir(Ator ator) ;
 	public void remover (long id) ;
 	public List<Ator> lista(); 
-	public List<Ator> apenasUmFilme (String nome);
+	public List<Ator> apenasUmAtor (String nome);
 }

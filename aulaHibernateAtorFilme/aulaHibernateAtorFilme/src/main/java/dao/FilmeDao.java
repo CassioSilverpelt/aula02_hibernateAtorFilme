@@ -37,6 +37,7 @@ public class FilmeDao implements IFilmeDao{
 		em.getTransaction().commit();
 		em.close();
 	}
+	
 	public void remover(long id) {
 		EntityManager em = mf.createEntityManager();
 		em.getTransaction().begin();
