@@ -4,7 +4,9 @@ package fronteira;
 import java.util.List;
 import java.util.Scanner;
 
+import controller.AtorController;
 import controller.FilmeController;
+import model.Ator;
 import model.Filme;
 
 public class Main {
@@ -13,9 +15,13 @@ public class Main {
 
 		Scanner scanner = new Scanner(System.in);
 		String nomeFilme;
-		Filme f1 = new Filme ( );
+		String nomeAtor;
+		Filme f1 = new Filme ();
+		Ator a1 = new Ator ();
 		FilmeController fControl = new FilmeController();
+		AtorController aControl = new AtorController();
 		int escolha;
+		long id;
 
 		do {
 			System.out.println("Menu:");
@@ -27,8 +33,8 @@ public class Main {
 			System.out.println("=======================");
 			System.out.println("6. Inserir Ator");
 			System.out.println("7. Pequisar um Ator");
-			System.out.println("8. Apagar um Ator");
-			System.out.println("9. Atualizar um Ator");
+			System.out.println("8. Atualizar um Ator");
+			System.out.println("9. Apagar um Ator");
 			System.out.println("=======================");
 			System.out.println("10. Participação Ator no Filme");
 			System.out.println("11. Sair");
@@ -71,7 +77,7 @@ public class Main {
 				
 			case 4:
 				System.out.println("Escolha um filme para atualizar ");
-				long id = scanner.nextLong();
+				id = scanner.nextLong();
 				f1.setId(id);
 				f1.setTitulo("Terminator");
 				f1.setNomeDiretor("James Cammeron");
@@ -79,25 +85,40 @@ public class Main {
 				break;
 			case 5:
 				System.out.println("Escolha um filme para apagar ");
-				 id = scanner.nextLong();
+				id = scanner.nextLong();
 				fControl.apagar(id);
 				break;	
 			case 6:
 				System.out.println("Inserir ator ");
-//				long id = scanner.nextLong();
-//				fControl.apagar(id);
+				a1.setId(0);
+				a1.setNome("Tony Ramos");
+				a1.setPais("Brasil");
+				aControl.inserirAtor(a1);		
 				break;
 			case 7:
-				System.out.println("Escolha um ator para apagar ");
-				
+				System.out.println("Pesquisar um Ator: ");
+				nomeAtor = scanner.next();
+				List<Ator> atores = aControl.pesquisarUmAtor(nomeAtor);	
+				if (!(atores.isEmpty())) {
+					for (Ator ator : atores ) {
+						System.out.println("Nome: " + ator.getNome() + " Id= " + ator.getId()+ " Pais: " + ator.getPais());
+					}
+				}
+				else System.out.println("Não encontrou o Ator");
+				scanner.nextLine();
 				break;
 			case 8:
-				System.out.println("Escolha um ator para apagar ");
-				
+				System.out.println("Escolha um ator para atualizar: ");
+				id = scanner.nextLong();
+				a1.setId(id);
+				a1.setNome("Julia Roberts");
+				a1.setPais("Estados Unidos");
+				aControl.atualizar(a1);	
 				break;
 			case 9:
-				System.out.println("Escolha um ator para apagar ");
-				
+				System.out.println("Escolha um ator para apagar: ");
+				id = scanner.nextLong();
+				aControl.apagar(id);
 				break;
 			case 10:
 				System.out.println("XXXX ");

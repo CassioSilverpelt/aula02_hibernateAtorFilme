@@ -30,6 +30,8 @@ public class AtorDao implements IAtorDao{
 		if (ator != null) {
 			em.remove(ator);
 		}
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	public List<Ator> lista() {
@@ -46,6 +48,14 @@ public class AtorDao implements IAtorDao{
 					.getResultList();
 		em.close();
 		return atores;
+	}
+
+	public void atualizar(Ator ator) {
+		EntityManager em = mf.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(ator);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 }
