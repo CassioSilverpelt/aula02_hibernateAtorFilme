@@ -18,6 +18,7 @@ public class Main {
 		String nomeAtor;
 		Filme f1 = new Filme ();
 		Ator a1 = new Ator ();
+		
 		FilmeController fControl = new FilmeController();
 		AtorController aControl = new AtorController();
 		int escolha;
@@ -45,6 +46,7 @@ public class Main {
 			switch (escolha) {
 			case 1:// utilize o Scanner para captar dados
 				System.out.println("Inserir Filme");
+				//Adicionado Filme
 				f1.setId(0);
 				f1.setTitulo("Cidade de Deus");
 				f1.setNomeDiretor("Ze Trindade");
@@ -90,6 +92,7 @@ public class Main {
 				break;	
 			case 6:
 				System.out.println("Inserir ator ");
+				//Adicionando atores
 				a1.setId(0);
 				a1.setNome("Tony Ramos");
 				a1.setPais("Brasil");
@@ -121,7 +124,14 @@ public class Main {
 				aControl.apagar(id);
 				break;
 			case 10:
-				System.out.println("XXXX ");
+				System.out.println("Escolha um filme para adicionar um ator: ");
+				scanner.nextLine();
+				String fNome = scanner.nextLine();
+				List<Filme> f = fControl.pesquisarUmFilme(fNome);
+				System.out.println("Escolha um ator para adicionar ao filme " + fNome + ": ");
+				String aNome = scanner.nextLine();
+				List<Ator> a = aControl.pesquisarUmAtor(aNome);
+				f.get(0).setAtores(a.get(0));
 				
 				break;
 			case 11:

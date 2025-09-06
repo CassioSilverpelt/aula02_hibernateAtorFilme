@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 public class Ator implements Serializable{
@@ -19,6 +23,12 @@ public class Ator implements Serializable{
 	private String nome;
 	
 	private String pais;
+	
+	@ManyToMany
+	@JoinTable(name="ator_filme", joinColumns =
+	@JoinColumn(name="ator_id"),
+	inverseJoinColumns = @JoinColumn(name = "filme_id"))
+	private List<Filme> atuacoes;
 	
 	public long getId() {
 		return id;
@@ -39,5 +49,11 @@ public class Ator implements Serializable{
 	}
 	public void setPais(String pais) {
 		this.pais = pais;
+	}
+	public List<Filme> getFilmes(){
+		return this.atuacoes;
+	}
+	public void setFilmes(Filme filme) {
+		this.atuacoes.add(filme);
 	}
 }
