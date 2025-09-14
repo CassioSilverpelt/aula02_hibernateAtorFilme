@@ -1,6 +1,5 @@
 package fronteira;
 
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -127,11 +126,14 @@ public class Main {
 				System.out.println("Escolha um filme para adicionar um ator: ");
 				scanner.nextLine();
 				String fNome = scanner.nextLine();
-				List<Filme> f = fControl.pesquisarUmFilme(fNome);
+				Filme f = fControl.pesquisarUmFilme(fNome).get(0);
 				System.out.println("Escolha um ator para adicionar ao filme " + fNome + ": ");
 				String aNome = scanner.nextLine();
-				List<Ator> a = aControl.pesquisarUmAtor(aNome);
-				f.get(0).setAtores(a.get(0));
+				Ator a = aControl.pesquisarUmAtor(aNome).get(0);
+				f.setAtores(a);
+				a.setFilmes(f);
+				aControl.atualizar(a);
+				fControl.atualizar(f);
 				
 				break;
 			case 11:

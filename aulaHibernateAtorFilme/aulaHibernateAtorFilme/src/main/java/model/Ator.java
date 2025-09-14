@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class Ator implements Serializable{
 	
 	private String pais;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="ator_filme", joinColumns =
 	@JoinColumn(name="ator_id"),
 	inverseJoinColumns = @JoinColumn(name = "filme_id"))

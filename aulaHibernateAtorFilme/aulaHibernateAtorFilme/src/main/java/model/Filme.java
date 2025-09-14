@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ public class Filme implements Serializable{
 	
 	private String nomeDiretor;
 	
-	@ManyToMany (mappedBy = "atuacoes")
+	@ManyToMany(mappedBy = "atuacoes",fetch=FetchType.EAGER)
 	private List<Ator> atores;
 	
 	public Filme( ) {
